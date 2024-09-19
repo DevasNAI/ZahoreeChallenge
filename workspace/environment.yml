@@ -1,0 +1,8 @@
+name: spotify
+channels:
+- defaults
+dependencies:
+- python=3.10.9
+- numpy
+- matplotlib=3.9.2
+- pandas=2.2.2
