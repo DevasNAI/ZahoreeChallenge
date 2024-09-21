@@ -122,9 +122,9 @@ def recommend_playlist_name(playlist_vector, df, top_n=1):
   return playlist_counts.index.tolist()[:top_n]
 
 
-
-
-
+def user_recommendation_playlist_organized(df):
+  return pd.DataFrame({"track_id": df["track_id"], "track_name": df["track_name"], "track_artist":df["track_artist"], "genres":df["playlist_genres"]})
+   
 
 def delete_null_data(df):
   """
@@ -147,11 +147,11 @@ def delete_null_data(df):
 def main():
   # Gets dataset info
   df = read_dataset("spotify_songs.csv")
-  userA = user_data_full("User_A.csv", df)
-  userB = user_data_full("User_B.csv", df)
-  userJ = user_data_full("User_J.csv", df)
-  userO = user_data_full("User_O.csv", df)
-  newuser_df = user_data_full("${name}.csv", df)
+  user_df_A = user_data_full("User_A.csv", df)
+  user_df_B = user_data_full("User_B.csv", df)
+  user_df_J = user_data_full("User_J.csv", df)
+  user_df_O = user_data_full("User_O.csv", df)
+ # newuser_df = user_data_full("${name}.csv", df)
   # Cleans dataset
   df = delete_null_data(df)
   print(df.shape)
@@ -165,3 +165,19 @@ def main():
   # Apply the function to create the new dataframe
   feature_set_df = create_genre_feature_set(df, float_cols)
 
+  # Creates a playlist vector based on user data
+  playlist_vector_A = generate_playlist_feature_vector(user_df_B, feature_set_df)
+  print(playlist_vector_A.shape)
+
+  # Generate recomendation
+  recommendations_df = generate_recommendation(playlist_vector_A, feature_set_df, df)
+
+  # Simplified recomendation playlist
+  abstract_recomendation = user_recommendation_playlist_organized(recommendations_df)
+  print(abstract_recomendation["track_name"])
+  # Recommend playlist
+  recommended_playlist_name = recommend_playlist_name(playlist_vector_A, df)
+  print(recommended_playlist_name)
+  
+
+main()
