@@ -102,7 +102,7 @@ def generate_recommendation(playlist_vector, feature_set_df, df, top_n=15):
   return recommended_tracks
 
 
-def recommend_playlist_name(playlist_vector, df, top_n=1):
+def recommend_playlist_name(recomendations_df, top_n=1):
   """
   @brief Recommends a playlist.
 
@@ -112,11 +112,8 @@ def recommend_playlist_name(playlist_vector, df, top_n=1):
 
   @return A list of recommended playlist names.
   """
-  # Calls for cosine recomendation dataframe
-  recommendations_df = generate_recommendation(playlist_vector, feature_set_df, df, top_n)
-
   # Sort the recomendation
-  playlist_counts = recommendations_df.groupby('playlist_name').size().sort_values(ascending=False)
+  playlist_counts = recomendations_df.groupby('playlist_name').size().sort_values(ascending=False)
 
   # Playist recomendation
   return playlist_counts.index.tolist()[:top_n]
@@ -166,7 +163,7 @@ def main():
   feature_set_df = create_genre_feature_set(df, float_cols)
 
   # Creates a playlist vector based on user data
-  playlist_vector_A = generate_playlist_feature_vector(user_df_B, feature_set_df)
+  playlist_vector_A = generate_playlist_feature_vector(user_df_A, feature_set_df)
   print(playlist_vector_A.shape)
 
   # Generate recomendation
@@ -174,9 +171,9 @@ def main():
 
   # Simplified recomendation playlist
   abstract_recomendation = user_recommendation_playlist_organized(recommendations_df)
-  print(abstract_recomendation["track_name"])
+  #print(abstract_recomendation["track_name"])
   # Recommend playlist
-  recommended_playlist_name = recommend_playlist_name(playlist_vector_A, df)
+  recommended_playlist_name = recommend_playlist_name(recommendations_df)
   print(recommended_playlist_name)
   
 
