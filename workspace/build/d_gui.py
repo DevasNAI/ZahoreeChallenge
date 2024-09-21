@@ -24,7 +24,7 @@ from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage, ttk
 OUTPUT_PATH = Path(__file__).parent
 ASSETS_PATH = OUTPUT_PATH / Path(r"/home/zahoree/workspace/build/assets/frame0")
 
-os.environ['DISPLAY'] = ':0'
+#os.environ['DISPLAY'] = ':0'
 os.environ["DATA_DIR"] = "/home/zahoree/workspace"
 
 def relative_to_assets(path: str) -> Path:
