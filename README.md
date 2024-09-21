@@ -9,7 +9,26 @@ This repository has a playlist and music recommendation system which suggests pl
 # Setting up environment
 If you want to use this repository, you must get the Docker Image and create a container, everything will run as it should when you create the container by following the instructions found in [Docker](github.com/DevasNAI/ZahoreeChallenge/Docker/)
 
-## Docker Container access
+
+
+
+## Run script
+You need to initialize conda and restart the shell.
+```
+conda init
+```
+Once restarted, follow the next commands:
+
+```
+conda activate spotify
+cd hoome/zahoree/workspace/build
+```
+To run the script:
+```
+python3 d_gui.py
+```
+
+## Docker Container access (with image)
 Once you have your docker system running, you may access to it throuch VNC Viewer or other means, just follow the following instructions.
 
 -- I have been struggling to get the Docker image running as it should, so I exported the conda environment to be able to run it if you have Anaconda or miniconda installed.
