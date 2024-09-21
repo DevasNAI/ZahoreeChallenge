@@ -163,11 +163,11 @@ def main():
   feature_set_df = create_genre_feature_set(df, float_cols)
 
   # Creates a playlist vector based on user data
-  playlist_vector_A = generate_playlist_feature_vector(user_df_A, feature_set_df)
-  print(playlist_vector_A.shape)
+  playlist_vector = generate_playlist_feature_vector(user_df_A, feature_set_df)
+  print(playlist_vector.shape)
 
   # Generate recomendation
-  recommendations_df = generate_recommendation(playlist_vector_A, feature_set_df, df)
+  recommendations_df = generate_recommendation(playlist_vector, feature_set_df, df)
 
   # Simplified recomendation playlist
   abstract_recomendation = user_recommendation_playlist_organized(recommendations_df)
