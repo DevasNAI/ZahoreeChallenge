@@ -13,17 +13,21 @@ If you want to use this repository, you must get the Docker Image and create a c
 Once you have your docker system running, you may access to it throuch VNC Viewer or other means, just follow the following instructions.
 
 ### VNC Viewer
-![image]["VNC Viewer.png"]
 Open VNC Viewer, then write the following:
 ```
 localhost:5900
 ```
 You will be prompted a pop-up alert, accept it and proceed to write your VNC Password.
-
+<p align="center">
+<img src="https://github.com/DevasNAI/ZahoreeChallenge/blob/main/images/vncalert.png" width="50%" height="50%" title= "VNC Viewer" alt="DFD">
+</p>
 
 
 Once entered, you can open a terminal by clicking the icon on the down left corner and select System Tools as shown at the image.
-![image]["LXterminal.png"]
+
+<p align="center">
+<img src="https://github.com/DevasNAI/ZahoreeChallenge/blob/main/images/LXTerminal.png" width="50%" height="50%" title= "Find LX Terminal" alt="LX">
+</p>
 
 ### novnc
 Once the container has started, go to https:\\localhost:6080
