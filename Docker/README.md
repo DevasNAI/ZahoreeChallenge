@@ -10,9 +10,15 @@ Depending on the device you are using, you can use the following code to create 
 For windows
 
 ```
-docker run -p 6080:80 -p 6022:22 -p 8002:8002 -p 7042:7042 -p 5900:5900 -e VNC_PASSWORD=zahoree -p 8042:8042 -e USER=zahoree -e PASSWORD=zahoree -v /dev/shm:/dev/shm -v "e/Programasyarchivos/Archivos_escolares/Repositorios Github/ZahoreeChallenge/workspace":/home/zahoree/workspace --name zahoreechallenge1 dorowu/ubuntu-desktop-lxde-vnc:focal /startup.sh
+docker run -p 6080:80 -p 6022:22 -p 8002:8002 -p 7042:7042 -p 5900:5900 -e VNC_PASSWORD=zahoree -p 8042:8042 -e USER=zahoree -e PASSWORD=zahoree -v /dev/shm:/dev/shm -v "e/Programasyarchivos/Archivos_escolares/Repositorios Github/ZahoreeChallenge/workspace":/home/zahoree/workspace --name zahoreechallenge devasnai/challenges:vnc-ubuntu-conda /startup.sh
 
 ```
+
+
+
+docker run -p 6080:80 -p 6022:22 -p 8002:8002 -p 7042:7042 -p 5900:5900 -e VNC_PASSWORD=zahoree -p 8042:8042 -v /dev/shm:/dev/shm -v "e/Programasyarchivos/Archivos_escolares/Repositorios Github/ZahoreeChallenge/workspace":/home/zahoree/workspace --name zahoreechallenge devasnai/challenges:vnc-ubuntu-conda /startup.sh
+
+https://medium.com/@potatowagon/how-to-use-gui-apps-in-linux-docker-container-from-windows-host-485d3e1c64a3
 
 For Linux
 
@@ -30,3 +36,7 @@ remember to add the bashrc file
 cp --backup=t /etc/skel/.bashrc ~
 export PATH="/home/username/miniconda/bin:$PATH"
 ----------
+
+
+
+https://community.anaconda.cloud/t/jsondecodeerror-for-many-conda-commands/60397/3
