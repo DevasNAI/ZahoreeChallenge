@@ -1,6 +1,6 @@
 # Docker Image
 
-The Docker Image is located at ![https://hub.docker.com/repository/docker/devasnai/challenges/general][my docker repository] at Docker Hub, it is not stable as of now, I will try to change with with a more lighter Docker Image which you may build with a Dockerfile, the conda file is already made so there should'nt be more problem.
+The Docker Image is located at [my docker repository](https://hub.docker.com/repository/docker/devasnai/challenges/general) at Docker Hub, it is not stable as of now, I will try to change with with a more lighter Docker Image which you may build with a Dockerfile, the conda file is already made so there should'nt be more problem.
 
 
 Depending on the device you are using, you can use the following commands to create the container
