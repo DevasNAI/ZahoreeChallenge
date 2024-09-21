@@ -190,17 +190,16 @@ def update_recommendations_tkinter():
 
       # Clear previous output
       recommendation_text.delete("1.0", tk.END)
+      playlist_recommendation.delete("1.0", tk.END)
 
       # Display the recommended playlist name
       recommended_playlist_name_list = recommend_playlist_name(recommendations_df)
       # Display the recommended playlist
       if recommended_playlist_name_list:
-        recommendation_text.insert(tk.END, f"Recommended Playlist Name: {recommended_playlist_name_list[0]}\n\n")
+        playlist_recommendation.insert(tk.END, f"{recommended_playlist_name_list[0]}\n\n")
       else:
-        recommendation_text.insert(tk.END, "No playlist name recommendation found.\n\n")
+        playlist_recommendation.insert(tk.END, "No playlist name recommendation found.\n\n")
 
-      # Display the top recommendations in a simplified format
-      recommendation_text.insert(tk.END, "Top Recommendations:\n")
       for index, row in recommendations_df[['track_name', 'track_artist']].head(10).iterrows():
         recommendation_text.insert(tk.END, f"- {row['track_name']} by {row['track_artist']}\n")
 
@@ -302,13 +301,13 @@ entry_bg_1 = canvas.create_image(
     258.5,
     image=entry_image_1
 )
-entry_1 = Text(
+playlist_recommendation = Text(
     bd=0,
     bg="#D9D9D9",
     fg="#000716",
     highlightthickness=0
 )
-entry_1.place(
+playlist_recommendation.place(
     x=19.0,
     y=251.0,
     width=194.0,
@@ -396,19 +395,6 @@ recommendation_text.place(
     width=264.0,
     height=227.0
 )
-#recommendation_text.pack(expand=True, fill=tk.BOTH)
-
-
-
-
-
-
-
-
-# Create a button to update the recommendations
-#update_button = tk.Button(window, text="Get Recommendations", command=update_recommendations_tkinter)
-#button_1.pack(pady=10)
-
 
 
 
