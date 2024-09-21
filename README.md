@@ -7,7 +7,7 @@ This repository has a playlist and music recommendation system which suggests pl
 
 
 # Setting up environment
-If you want to use this repository, you must get the Docker Image and create a container, everything will run as it should when you create the container by following the instructions found int ![github.com/DevasNAI/ZahoreeChallenge/Docker/][link]
+If you want to use this repository, you must get the Docker Image and create a container, everything will run as it should when you create the container by following the instructions found in [Docker](github.com/DevasNAI/ZahoreeChallenge/Docker/)
 
 ## Docker Container access
 Once you have your docker system running, you may access to it throuch VNC Viewer or other means, just follow the following instructions.
