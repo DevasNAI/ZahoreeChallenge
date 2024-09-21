@@ -16,6 +16,7 @@ def read_dataset(file_name):
     return pd.read_csv(file_name)
 
 def user_data_full(file_name, df):
+    """ Reads the user's dataset  """
     user_df = read_dataset(file_name)
     #   Fixing user dataframe columns
     user_df.columns = ["track_id", "track_name", "track_artist"]
@@ -54,7 +55,7 @@ def create_genre_feature_set(df, float_cols):
 
 def generate_playlist_feature_vector(user_df, feature_set_df):
   """
-  Generates a playlist feature vector by averaging the vector's features of liked user songs.
+  @brief Generates a playlist feature vector by averaging the vector's features of liked user songs.
 
   @param user_df        User playlist dataframe 
   @param feature_set_df Feature dataframe 
@@ -72,7 +73,7 @@ def generate_playlist_feature_vector(user_df, feature_set_df):
 
 def generate_recommendation(playlist_vector, feature_set_df, df, top_n=15):
   """
-  Generates music recommendations based on a playlist vector using cosine similarity.
+  @brief  Generates music recommendations based on a playlist vector using cosine similarity.
 
   @param playlist_vector  Playlist Feature vector with user likeness.
   @param feature_set_df   Feature set dataframe.
@@ -103,7 +104,7 @@ def generate_recommendation(playlist_vector, feature_set_df, df, top_n=15):
 
 def recommend_playlist_name(playlist_vector, df, top_n=1):
   """
-  Recommends a playlist.
+  @brief Recommends a playlist.
 
   @param  playlist_vector   The playlist feature vector.
   @param  df                DataFrame containing the original track information.
@@ -123,34 +124,44 @@ def recommend_playlist_name(playlist_vector, df, top_n=1):
 
 
 
-df = read_dataset("spotify_songs.csv")
-userA = user_data_full("User_A.csv", df)
-userB = user_data_full("User_B.csv", df)
-userJ = user_data_full("User_J.csv", df)
-userO = user_data_full("User_O.csv", df)
 
 
-# Check if there are null values in the data frame
-print(df.isnull().sum())
-print(df.shape)
-# Finds null data
-null_mask = df.isnull().any(axis=1)
-null_rows = df[null_mask]
-null_rows
-# Deletes rows where there are null data
-df = df.dropna(axis=0, how='any')
+def delete_null_data(df):
+  """
+    @brief Checks if there are null values in the data frame and deletes them.
+    
+    @param  df  Spotify Dataframe
+    @return df  Dataframe without null values
+  """
+  print(df.shape)
+  # Finds null data
+  null_mask = df.isnull().any(axis=1)
+  #print(null_mask)
+  # Deletes rows where there are null data
+  df = df.dropna(axis=0, how='any')
 
-print(df.shape)
+  return df
 
 #-----------------------------------------------
 
-# Create a new column with a list of playlist_genre and playlist_subgenre
-df['playlist_genres'] = df.apply(lambda row: [row['playlist_genre'], row['playlist_subgenre']], axis=1)
+def main():
+  # Gets dataset info
+  df = read_dataset("spotify_songs.csv")
+  userA = user_data_full("User_A.csv", df)
+  userB = user_data_full("User_B.csv", df)
+  userJ = user_data_full("User_J.csv", df)
+  userO = user_data_full("User_O.csv", df)
+  newuser_df = user_data_full("${name}.csv", df)
+  # Cleans dataset
+  df = delete_null_data(df)
+  print(df.shape)
 
+  # Create a new column with a list of playlist_genre and playlist_subgenre
+  df['playlist_genres'] = df.apply(lambda row: [row['playlist_genre'], row['playlist_subgenre']], axis=1)
 
-# Feature set data preparation
-float_cols = df.dtypes[df.dtypes == 'float64'].index.values
+  # Feature set data preparation
+  float_cols = df.dtypes[df.dtypes == 'float64'].index.values
 
-# Apply the function to create the new dataframe
-feature_set_df = create_genre_feature_set(df, float_cols)
+  # Apply the function to create the new dataframe
+  feature_set_df = create_genre_feature_set(df, float_cols)
 
