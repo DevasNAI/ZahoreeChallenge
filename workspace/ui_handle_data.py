@@ -5,6 +5,8 @@ from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.preprocessing import MinMaxScaler
 import seaborn as sns
 import matplotlib.pyplot as plt
+import tkinter as tk
+from tkinter import ttk
 
 
 
@@ -176,5 +178,74 @@ def main():
   recommended_playlist_name = recommend_playlist_name(recommendations_df)
   print(recommended_playlist_name)
   
+df = read_dataset("spotify_songs.csv")
+user_df_A = user_data_full("User_A.csv", df)
+user_df_B = user_data_full("User_B.csv", df)
+user_df_J = user_data_full("User_J.csv", df)
+user_df_O = user_data_full("User_O.csv", df)
+df = delete_null_data(df)
 
-main()
+  # Create a new column with a list of playlist_genre and playlist_subgenre
+df['playlist_genres'] = df.apply(lambda row: [row['playlist_genre'], row['playlist_subgenre']], axis=1)
+
+# Feature set data preparation
+float_cols = df.dtypes[df.dtypes == 'float64'].index.values
+
+# Apply the function to create the new dataframe
+feature_set_df = create_genre_feature_set(df, float_cols)
+
+
+
+def update_recommendations_tkinter():
+  global feature_set_df 
+  global df
+  selected_user_file = user_file_dropdown.get()
+  if selected_user_file:
+    try:
+      # Get selected user data
+      user_df = user_data_full(selected_user_file, df)
+      # Generate recommendations
+      playlist_vector = generate_playlist_feature_vector(user_df, feature_set_df)
+      recommendations_df = generate_recommendation(playlist_vector, feature_set_df, df)
+
+      # Clear previous output
+      recommendation_text.delete("1.0", tk.END)
+
+      # Display the recommended playlist name
+      recommended_playlist_name_list = recommend_playlist_name(recommendations_df)
+      # Display the recommended playlist
+      if recommended_playlist_name_list:
+          recommendation_text.insert(tk.END, f"Recommended Playlist Name: {recommended_playlist_name_list[0]}\n\n")
+      else:
+          recommendation_text.insert(tk.END, "No playlist name recommendation found.\n\n")
+
+      # Display the top recommendations in a simplified format
+      recommendation_text.insert(tk.END, "Top Recommendations:\n")
+      for index, row in recommendations_df[['track_name', 'track_artist']].head(10).iterrows():
+          recommendation_text.insert(tk.END, f"- {row['track_name']} by {row['track_artist']}\n")
+
+    except FileNotFoundError:
+      recommendation_text.insert(tk.END, f"File '{selected_user_file}' not found.")
+    except Exception as e:
+      recommendation_text.insert(tk.END, f"An error occurred: {e}")
+
+
+# Create the main window
+root = tk.Tk()
+root.title("Music Recommendation System")
+
+# Create a dropdown for selecting the user file
+user_file_dropdown = ttk.Combobox(root, values=['User_A.csv', 'User_B.csv', 'User_J.csv', 'User_O.csv'])
+user_file_dropdown.pack(pady=10)
+
+# Create a button to update the recommendations
+update_button = tk.Button(root, text="Get Recommendations", command=update_recommendations_tkinter)
+update_button.pack(pady=10)
+
+# Create a text widget to display the recommendations
+recommendation_text = tk.Text(root, wrap=tk.WORD)
+recommendation_text.pack(expand=True, fill=tk.BOTH)
+
+root.mainloop()
+
+#main()
