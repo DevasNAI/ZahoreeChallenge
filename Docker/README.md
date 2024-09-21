@@ -46,3 +46,6 @@ To run in terminal
 docker exec -it song_recommender bash
 ```
 
+I have Windows 10 with WSL2 but I cannot prove that it works with a terminal because of trouble with my computer but the implementation must work on a Linux Debian system with the provided instructions.
+
+You may also attach a shell on Visual Studio if you have the Docker extension.
