@@ -44,6 +44,15 @@ cd ZahoreeChallenge/workspace/build
 python3 d_gui.py
 ```
 
+## Solution UI
+If everything ran as expected, you should be able to visualize the following image.
+<p align="center">
+<img src="https://github.com/DevasNAI/ZahoreeChallenge/blob/main/images/solution.png" width="50%" height="50%" title= "Spotify Recommendation" alt="recom">
+</p>
+
+You can select the user playlist and when you click the select button, you will see a playlist recommendation and a new playlist of 15 songs.
+
+
 ### VNC Viewer
 Open VNC Viewer, then write the following:
 ```
