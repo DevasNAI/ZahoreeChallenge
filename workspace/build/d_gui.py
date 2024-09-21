@@ -199,9 +199,10 @@ def update_recommendations_tkinter():
         playlist_recommendation.insert(tk.END, f"{recommended_playlist_name_list[0]}\n\n")
       else:
         playlist_recommendation.insert(tk.END, "No playlist name recommendation found.\n\n")
-
-      for index, row in recommendations_df[['track_name', 'track_artist']].head(10).iterrows():
-        recommendation_text.insert(tk.END, f"- {row['track_name']} by {row['track_artist']}\n")
+        
+      # Display the songs of the generated playlist
+      for index, row in recommendations_df[['track_name', 'track_artist', 'playlist_genre']].head(10).iterrows():
+        recommendation_text.insert(tk.END, f"- {row['track_name']} by {row['track_artist']} ({row['playlist_genre']})\n")
 
     except FileNotFoundError:
       recommendation_text.insert(tk.END, f"File '{selected_user_file}' not found.")
@@ -212,11 +213,7 @@ def update_recommendations_tkinter():
 
 
 window = Tk()
-
-
-
-
-
+window.title("Music recommendations")
 
 
 window.geometry("600x400")
@@ -357,7 +354,7 @@ canvas.create_text(
     fill="#000000",
     font=("Inter Bold", 12 * -1)
 )
-
+#   Assign data directory location to combo box
 button_image_2 = PhotoImage(
     file=relative_to_assets("button_2.png"))
 user_file_dropdown = ttk.Combobox(
