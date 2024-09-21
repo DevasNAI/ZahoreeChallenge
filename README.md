@@ -12,6 +12,19 @@ If you want to use this repository, you must get the Docker Image and create a c
 ## Docker Container access
 Once you have your docker system running, you may access to it throuch VNC Viewer or other means, just follow the following instructions.
 
+-- I have been struggling to get the Docker image running as it should, so I exported the conda environment to be able to run it if you have Anaconda or miniconda installed.
+
+To install the conda environment run:
+```
+conda env create -f environment.yml
+```
+
+To run the program, go to the build directory and run:
+```
+cd ZahoreeChallenge/workspace/build
+python3 d_gui.py
+```
+
 ### VNC Viewer
 Open VNC Viewer, then write the following:
 ```
