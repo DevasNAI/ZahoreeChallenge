@@ -20,7 +20,7 @@ RUN apt-get -qq update && apt-get -qq -y install curl bzip2 \
 
 ENV PATH /opt/conda/bin:$PATH
 
-RUN apt-get install -y vnc
+#    RUN apt-get install -y vnc    This causes Docker build problems
 
 # Install Miniconda3 (adjust version and installation path if needed)
 #RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -o miniconda.sh
