@@ -13,6 +13,8 @@ If you want to use this repository, you must get the Docker Image and create a c
 
 
 ## Run script
+Check if you are already running conda, the terminal should look something like: ```(base) root@36ee1de4bd3e:/#  ```, if it doesn't look the same, follow this instructions.
+
 You need to initialize conda and restart the shell.
 ```
 conda init
@@ -21,7 +23,7 @@ Once restarted, follow the next commands:
 
 ```
 conda activate spotify
-cd hoome/zahoree/workspace/build
+cd home/zahoree/workspace/build
 ```
 To run the script:
 ```
@@ -53,8 +55,8 @@ If everything ran as expected, you should be able to visualize the following ima
 You can select the user playlist and when you click the select button, you will see a playlist recommendation and a new playlist of 15 songs.
 
 
-### VNC Viewer
-Open VNC Viewer, then write the following:
+# VNC Viewer
+If you are using the no-VNC DOcker image, open VNC Viewer, then write the following:
 ```
 localhost:5900
 ```
